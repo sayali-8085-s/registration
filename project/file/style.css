@@ -1,0 +1,38 @@
+.parent{
+    background-color: brown;
+    min-height: 60vh;
+    display: grid;
+    
+    grid-auto-flow : column;
+    
+}
+.box{
+    color:black
+    
+    width: 60px;
+    height: 60px;
+    grid-row:2/4
+    grid-column:2/4
+
+}
+
+.box-1{
+    background-color: rgb(20, 20, 168);
+    
+}
+.box-2 {
+    background-color: rgba(0, 128, 0, 0.226)  ;
+}
+.box-3{
+    background-color: yellow;
+}
+.box-4{
+    background-color: pink;
+}
+.box-5{
+    background-color: orange;
+}
+.box-6{
+    background-color: purple;
+}
+
