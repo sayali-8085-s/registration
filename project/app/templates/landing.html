@@ -1,10 +1,10 @@
-{{msg}}
+ <h1 style="color: red;">{{msg}}</h1>
 
 <a href="{% url 'register' %}">register</a>
 <br/>
 <br/>
-<form action ="" method ="get">
-    <button type="submit">login</button>
+<form action ="{% url 'login' %}" method ="get" >
+    <button type="submit" >login</button>
 </form>
 
 {% if register %}
@@ -15,8 +15,8 @@
     name: <input type="text" name="name" value="{{name}}"> <br/>
     email: <input type="email" name="email" value={{email}}> <br/>
     document: <input type="file" name="document" value="{{document}}">
-    passw:<input type="text" name="passw" >
-    c_passw :<input type="text" name="c_passw" >
+    passw:<input type="password" name="passw" >
+    c_passw :<input type="password" name="c_passw" >
     <br/>
     <input type="submit" value="register"><br/>
    </form>

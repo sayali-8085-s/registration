@@ -25,5 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.landing,name='landing'),
     path('register/',views.register,name ='register'),
-   
+    path('login/',views.login,name ='login'),
+#    name related to url template related
+    
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,8 @@
+
+<form action="{% url 'login' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    Email: <input type="text" name="email" value="{{ email }}"><br/>
+    Password: <input type="password" name="passw" >
+    <button type="submit">Login</button>
+    <br/>
+</form>
