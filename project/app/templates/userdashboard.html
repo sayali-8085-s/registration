@@ -10,10 +10,12 @@
 
     <p><strong>Uploaded Document:</strong></p>
     <a href="{{ data.document.url }}" target="_blank">View Document</a>
+    <a href="{{ data.document.url }}" download>Download</a>
 
-    <p><strong>Password:</strong> {{ data.passw }}</p>  <!-- Not recommended to show! -->
+
+    <p><strong>Password:</strong> {{ data.passw }}</p>  
 
     <br><br>
-    <a href="{% url 'landing' %}">Logout</a>  <!-- Simulated logout by redirecting to landing -->
+    <a href="{% url 'landing' %}">Logout</a>  
 </body>
 </html>
