@@ -9,13 +9,35 @@
     <p><strong>Email:</strong> {{ data.email }}</p>
 
     <p><strong>Uploaded Document:</strong></p>
-    <a href="{{ data.document.url }}" target="_blank">View Document</a>
-    <a href="{{ data.document.url }}" download>Download</a>
+    <a href="{{ data.document.url }}" target="_blank" download="">View Document</a>
+  
 
 
-    <p><strong>Password:</strong> {{ data.passw }}</p>  
+    <p><strong>Password:</strong> {{ data.passw }}</p> 
+    <!-- <p><strong>id:</strong> {{ data.id }}</p>   -->
 
     <br><br>
+
+
+     <a href="{% url 'query' pk=data.id %}">query</a>
+
+
+
+     {{% if query %}
+     <form action="" method="post" enctype="multipart/form-data">
+     {% csrf_token %}
+     name: <input type="text" name="name" value="{{ data.name }}" readonly><br/>
+     Email: <input type="text" name="email" value="{{ data.email }}" readonly><br/>
+     query: <input type="text" name="query">
+     <input type="submit" value='query'>
+     <br/>
+     </form>
+
+     
+     
+     {% endif %}}
+
+
     <a href="{% url 'landing' %}">Logout</a>  
 </body>
 </html>

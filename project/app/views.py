@@ -49,7 +49,7 @@ def login(req):
            user=student.objects.get(email=e)
            passs= user.passw
            if(passs==p):
-            data={'name':user.name,'email':user.email ,'document':user.document,'passw':user.passw}
+            data={ 'id': user.id,'name':user.name,'email':user.email ,'document':user.document,'passw':user.passw}
             return render(req,'userdashboard.html',{'data':data})
 
                
@@ -72,17 +72,11 @@ def login(req):
    
 
 
+def query(req ,pk):
+    user=student.objects.get(id=pk)
+    data={ 'id': user.id,'name':user.name,'email':user.email ,'document':user.document,'passw':user.passw}
+    return render(req,'userdashboard.html',{'data':data ,'query':'query'})
+    
 
 
               
-# def registerdata(req):
-#     print('hello')
-#     if req.method =='POST':
-#         a=req.POST.get('name')
-#         b=req.POST.get('email')
-#         c=req.FILES.get('document')
-#         print(a,b,c,sep=',')
-
-#         student.objects.create(name=a,email=b,document=c)
-#         msg ="registration data saved"
-#         return render(req,'landing.html',{'msg':msg})
