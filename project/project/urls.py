@@ -27,8 +27,9 @@ urlpatterns = [
     path('register/',views.register,name ='register'),
     path('login/',views.login,name ='login'),
     path('query/<int:pk>/', views.query, name='query'),
+    path('querydata/', views.querydata, name='querydata'),
+    path('showquery/<int:pk>/', views.showquery, name='showquery'),
 
-   
 #    name related to url template related
     
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

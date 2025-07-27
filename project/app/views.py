@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from.models import student
+# from.models import student,Query
+from.models import *
 
 # Create your views here.
 def landing(req):
@@ -43,25 +44,15 @@ def login(req):
        e=req.POST.get('email',)
        p=req.POST.get('passw')
        data=student.objects.filter(email=e)
-
-
        if data:
            user=student.objects.get(email=e)
            passs= user.passw
            if(passs==p):
             data={ 'id': user.id,'name':user.name,'email':user.email ,'document':user.document,'passw':user.passw}
             return render(req,'userdashboard.html',{'data':data})
-
-               
-
            else:
                msg="pass not matched"
-               return render(req, 'login.html', {'msg': msg})
-
-                  
-            
-        
-        
+               return render(req, 'login.html', {'msg': msg})  
        else:
             msg="email id not register"
 
@@ -76,7 +67,33 @@ def query(req ,pk):
     user=student.objects.get(id=pk)
     data={ 'id': user.id,'name':user.name,'email':user.email ,'document':user.document,'passw':user.passw}
     return render(req,'userdashboard.html',{'data':data ,'query':'query'})
-    
+
+
+
+def querydata(req):
+    if req.method =='POST':
+        n=req.POST.get('name')
+        e=req.POST.get('email')
+        q=req.POST.get('query')
+        
+        
+        Query.objects.create(name=n,email=e,query=q)
+        user=student.objects.get(email=e)
+        data={ 'id': user.id,'name':user.name,'email':user.email ,'document':user.document,'passw':user.passw}
+        return render(req,'userdashboard.html',{'data':data})
+
+def showquery(req ,pk):
+    user = student.objects.get(id=pk)
+    all_query = Query.objects.filter(email=user.email)
+    data = {
+        'id': user.id,
+        'name': user.name,
+        'email': user.email,
+        'document': user.document,
+        'passw': user.passw
+    }
+    return render(req,'userdashboard.html',{'data': data, 'all_query': all_query})
+
 
 
               
