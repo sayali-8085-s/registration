@@ -96,4 +96,35 @@ def showquery(req ,pk):
 
 
 
-              
+def edit(req,pk,pke):
+    user = student.objects.get(id=pk)
+    
+    data = {
+        'id': user.id,
+        'name': user.name,
+        'email': user.email,
+        'document': user.document,
+        'passw': user.passw
+    }
+    olddata = student.objects.get(id=pke)
+    return render(req,'userdashboard.html',{'data': data, 'olddata': olddata})
+
+
+
+def updat(req, pk, pke):
+    user = student.objects.get(id=pk)
+    data = {
+        'id': user.id,
+        'name': user.name,
+        'email': user.email,
+        'document': user.document,
+        'passw': user.passw
+    }
+
+    if req.method == 'POST':
+        q = req.POST.get('query')
+        olddata = Query.objects.get(id=pke)  
+        olddata.query = q
+        olddata.save()
+        msg = "Query updated successfully!"
+        return render(req, 'userdashboard.html', {'data': data, 'msg': msg})

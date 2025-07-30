@@ -29,6 +29,8 @@ urlpatterns = [
     path('query/<int:pk>/', views.query, name='query'),
     path('querydata/', views.querydata, name='querydata'),
     path('showquery/<int:pk>/', views.showquery, name='showquery'),
+    path('edit/<int:pk>/<int:pke>/', views.edit, name='edit'),
+     path('updat/<int:pk>/<int:pke>/', views.updat, name='updat'),
 
 #    name related to url template related
     

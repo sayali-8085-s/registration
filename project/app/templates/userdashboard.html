@@ -33,18 +33,20 @@
      <br/>
      </form>
 
-     {% endif %}}
+     {% endif %}
 
      <a href="{% url 'showquery' pk=data.id %}">Show Query</a>
 
     
 {% if all_query %}
-<table>
+<table border ='' cellpadding='10px' cellspacing='10px'>
    <tr>
       <th>s.n0</th>
       <th>name</th>
       <th>email</th>
       <th>query</th>
+      <th>Edit</th>
+      <th>Delete</th>
    </tr>
    {% for i in all_query %}
    <tr>
@@ -52,7 +54,8 @@
       <td>{{ i.name }}</td>
       <td>{{ i.email }}</td>
       <td>{{ i.query }}</td>
-   </tr>
+      <td><a href="{% url 'edit' pk=data.id  pke=i.id %}">Edit</a></td>
+      
    {% endfor %}
 </table>
 {% else %}
@@ -60,7 +63,17 @@
 {% endif %}
 
      
+{% if olddata %}
+     <form action="{%  url 'updat' pk=data.id pke=olddata.id %}" method="post" >
+     {% csrf_token %}
+     name: <input type="text" name="name" value="{{ olddata.name }}" readonly><br/>
+     Email: <input type="text" name="email" value="{{ olddata.email }}" readonly><br/>
+     query: <input type="text" name="query">
+     <input type="submit" value='update'>
+     <br/>
+     </form>
 
+     {% endif %}
      
      
 
