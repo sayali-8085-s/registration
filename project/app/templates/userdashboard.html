@@ -55,11 +55,11 @@
       <td>{{ i.email }}</td>
       <td>{{ i.query }}</td>
       <td><a href="{% url 'edit' pk=data.id  pke=i.id %}">Edit</a></td>
+      <td><a href="{% url 'delete' pk=data.id  pke=i.id %}">Delete</a></td>
       
    {% endfor %}
 </table>
-{% else %}
-<p>No previous queries found.</p>
+
 {% endif %}
 
      

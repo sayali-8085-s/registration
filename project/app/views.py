@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render ,redirect
 # from.models import student,Query
 from.models import *
 
@@ -26,7 +26,8 @@ def register(req):
             if p ==cp:
                 student.objects.create(name=n,email=e,document=d,passw=p,c_passw=cp)
                 msg ="reg sucess"
-                return render(req, 'landing.html', {'msg': msg})
+                # return render(req, 'landing.html', {'msg': msg})
+                return redirect('login')
         
 
             else:
@@ -49,7 +50,8 @@ def login(req):
            passs= user.passw
            if(passs==p):
             data={ 'id': user.id,'name':user.name,'email':user.email ,'document':user.document,'passw':user.passw}
-            return render(req,'userdashboard.html',{'data':data})
+            # return render(req,'userdashboard.html',{'data':data})
+            return redirect('dashboard')
            else:
                msg="pass not matched"
                return render(req, 'login.html', {'msg': msg})  
@@ -61,6 +63,17 @@ def login(req):
    else:
        return render(req,'login.html')
    
+   
+def dashboard(req, pk):
+    user = student.objects.get(id=pk)
+    data = {
+        'id': user.id,
+        'name': user.name,
+        'email': user.email,
+        'document': user.document,
+        'passw': user.passw
+    }
+    return render(req, 'userdashboard.html', {'data': data})
 
 
 def query(req ,pk):
@@ -106,7 +119,7 @@ def edit(req,pk,pke):
         'document': user.document,
         'passw': user.passw
     }
-    olddata = student.objects.get(id=pke)
+    olddata = Query.objects.get(id=pke)
     return render(req,'userdashboard.html',{'data': data, 'olddata': olddata})
 
 
@@ -126,5 +139,23 @@ def updat(req, pk, pke):
         olddata = Query.objects.get(id=pke)  
         olddata.query = q
         olddata.save()
+        all_query = Query.objects.filter(email=user.email)
         msg = "Query updated successfully!"
-        return render(req, 'userdashboard.html', {'data': data, 'msg': msg})
+        return render(req, 'userdashboard.html', {'data': data, 'msg': msg, 'all_query':all_query})
+
+
+
+def delete(req ,pk ,pke):
+    deletequerry = Query.objects.get(id=pke)
+    deletequerry.delete()
+    user = student.objects.get(id=pk)
+    data = {
+        'id': user.id,
+        'name': user.name,
+        'email': user.email,
+        'document': user.document,
+        'passw': user.passw
+    }
+    all_query = Query.objects.filter(email=user.email)
+    return redirect('showquery', pk=user.id)
+    return render(req, 'userdashboard.html', {'data': data,  'all_query':all_query})
