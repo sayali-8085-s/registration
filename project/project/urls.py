@@ -26,11 +26,14 @@ urlpatterns = [
     path('',views.landing,name='landing'),
     path('register/',views.register,name ='register'),
     path('login/',views.login,name ='login'),
-    path('userdashboard/<int:pk>/', views.dashboard, name='dashboard'),
+    # path('userdashboard/<int:pk>/', views.dashboard, name='dashboard'),
+    path('userdashboard/', views.dashboard, name='dashboard'),
 
-    path('query/<int:pk>/', views.query, name='query'),
+
+    # path('query/<int:pk>/', views.query, name='query'),
+    path('userdashboard/query/<int:pk>/', views.query, name='query'),
     path('querydata/', views.querydata, name='querydata'),
-    path('showquery/<int:pk>/', views.showquery, name='showquery'),
+    path('userdashboard/showquery/<int:pk>/', views.showquery, name='showquery'),
     path('edit/<int:pk>/<int:pke>/', views.edit, name='edit'),
     path('updat/<int:pk>/<int:pke>/', views.updat, name='updat'),
     path('delete/<int:pk>/<int:pke>/', views.delete, name='delete'),

@@ -1,4 +1,6 @@
 from django.shortcuts import render ,redirect
+from django.urls import reverse
+from urllib.parse import urlencode
 # from.models import student,Query
 from.models import *
 
@@ -49,9 +51,14 @@ def login(req):
            user=student.objects.get(email=e)
            passs= user.passw
            if(passs==p):
-            data={ 'id': user.id,'name':user.name,'email':user.email ,'document':user.document,'passw':user.passw}
+            # data={ 'id': user.id,'name':user.name,'email':user.email ,'document':user.document,'passw':user.passw}
             # return render(req,'userdashboard.html',{'data':data})
-            return redirect('dashboard')
+           
+            req.session['id']=user.id
+            url = reverse('dashboard')
+            return redirect(url)
+
+            # return redirect('dashboard', pk=user.id)
            else:
                msg="pass not matched"
                return render(req, 'login.html', {'msg': msg})  
@@ -64,8 +71,20 @@ def login(req):
        return render(req,'login.html')
    
    
-def dashboard(req, pk):
-    user = student.objects.get(id=pk)
+# def dashboard(req, pk):
+#     user = student.objects.get(id=pk)
+#     data = {
+#         'id': user.id,
+#         'name': user.name,
+#         'email': user.email,
+#         'document': user.document,
+#         'passw': user.passw
+#     }
+#     return render(req, 'userdashboard.html', {'data': data})
+
+
+def dashboard(req ):
+    user = student.objects.get(id=req.session['id'])
     data = {
         'id': user.id,
         'name': user.name,
@@ -76,7 +95,8 @@ def dashboard(req, pk):
     return render(req, 'userdashboard.html', {'data': data})
 
 
-def query(req ,pk):
+
+def query(req ,pk ):
     user=student.objects.get(id=pk)
     data={ 'id': user.id,'name':user.name,'email':user.email ,'document':user.document,'passw':user.passw}
     return render(req,'userdashboard.html',{'data':data ,'query':'query'})
